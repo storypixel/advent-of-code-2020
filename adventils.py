@@ -19,3 +19,13 @@ def grid2dict(inp, type=str):
 
 def blanks2list(inp, type=str):
     return ''.join(list(str(line) for line in inp)).split('\n\n')
+
+
+# de-nests things but stops at strings so we don't get ['t', 'h', 'i', 's']
+def flatten(foo, something=str):
+    for x in foo:
+        if hasattr(x, '__iter__') and not isinstance(x, something):
+            for y in flatten(x):
+                yield y
+        else:
+            yield x
